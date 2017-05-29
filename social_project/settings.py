@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'djangobower',
 
     'people',
-    'django_extensions'
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'social_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'social_project' ,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,4 +123,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = "static/"
+
 STATIC_URL = '/static/'
+
+BOWER_INSTALLED_APPS = (
+   'jquery',
+   'bootstrap-sass',
+   'bootstrap',
+   'fontawesome'
+)
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, "static")
+SASS_PROCESSOR_ENABLED = True
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "static")
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, "people", "static", "sass"),
+    os.path.join(BASE_DIR, "static", "bower_components", "bootstrap-sass", "assets", "stylesheets"),
+    os.path.join(BASE_DIR, "social_project", "static", "sass"),
+]
+
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'social_project', "static"),
+]
+
+STATICFILES_FINDERS = [
+   'django.contrib.staticfiles.finders.FileSystemFinder',
+   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+   'sass_processor.finders.CssFinder',
+   'djangobower.finders.BowerFinder',
+]
